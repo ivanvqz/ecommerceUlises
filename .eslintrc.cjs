@@ -1,3 +1,5 @@
+import { off } from "process";
+
 module.exports = {
     "env": {
         "browser": true,
@@ -5,7 +7,8 @@ module.exports = {
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:pretier/recommended"
     ],
     "overrides": [
     ],
@@ -14,8 +17,14 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "pretier"
     ],
     "rules": {
+        "react/react-in-jsx-scope": "off",
+        "react/prop-types": off,
+        "prettier/prettier": [error, {
+            "semi": false,
+        }]
     }
 }

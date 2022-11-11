@@ -6,7 +6,9 @@ const App = () => {
             <MainHeader />
             {/* outlet es el componente que se encarga de renderizar el contenido de
              la ruta */}
-            <Outlet />
+            <div className="pt-16 max-w-256 m-auto">
+                <Outlet />
+            </div>
         </div>
     )
 }

@@ -1,7 +1,15 @@
+import { Link } from 'react-router-dom';
+
 const Logo = () => {
     return (
-        <div>
-            <img src="https://img.freepik.com/vector-premium/plantilla-happy-shop-logo_57516-57.jpg?w=2000" alt="logo" />
+        // ajustar o tamanho da imagem
+        <div className="logo flex">
+            <Link to="/">
+                <img
+                    src="https://ed.team/images/logo/logo-monocolor.svg" 
+                    alt="logo"
+                />
+            </Link>
         </div>
     )
 }
