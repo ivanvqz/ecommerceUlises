@@ -12,7 +12,7 @@ const Form = () => {
             product_images: [e.target.image.value],
             product_description: e.target.description.value,
             features: {
-                color: e.target.color.value
+                talla: e.target.talla.value
             }
             
         }
