@@ -1,6 +1,6 @@
 import useFetch from "../../hooks/Usefetch"
 
-const Products = () => {
+const Table = () => {
 
     const {data, error, loading} = useFetch("public/products") // endopint
     if( loading ) return <p className="text-center">Loading...</p>
@@ -15,7 +15,7 @@ const Products = () => {
                     data.map( product => (
                         (
                             <div key={product.id}>
-                                <h2 className="subtitle">{product.name}</h2>
+                                <h2 className="title-products">{product.name}</h2>
                                 <p >{product.image}</p>
                                 <p className="paragraph">{product.description}</p>
                             </div>
@@ -27,4 +27,4 @@ const Products = () => {
     )
 }
 
-export default Products
+export default Table
