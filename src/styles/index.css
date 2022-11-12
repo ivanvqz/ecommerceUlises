@@ -45,3 +45,7 @@
 .form-select{
     @apply block appearance-none w-full bg-gray-200 border border-emerald-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-emerald-500;
 }
+
+.desktop{
+    @apply md:flex-col md:items-center md:justify-center;
+}

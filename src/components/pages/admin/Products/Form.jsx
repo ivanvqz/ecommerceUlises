@@ -8,9 +8,9 @@ const Form = () => {
         
         const data = {
             product_name: e.target.productName.value,
-            product_price: Number(e.target.price.value),
-            product_images: [e.target.image.value],
-            product_description: e.target.description.value,
+            price: Number(e.target.price.value),
+            images: [e.target.image.value],
+            description: e.target.description.value,
             features: {
                 talla: e.target.talla.value
             }
@@ -38,7 +38,7 @@ const Form = () => {
         <div className="w-11/12	mx-auto">
             <h2 className="title-dashboard">Crear producto</h2>
             <form onSubmit={handleSubmit} className="w-full max-w-l my-3">
-                <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="flex flex-wrap -mx-3 mb-6 desktop">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label className="form-label">
                             Nombre del producto
@@ -46,7 +46,7 @@ const Form = () => {
                         <input 
                             className="form-input"
                             type="text" 
-                            name="productName"
+                            name="product_name"
                             required
                         />
                         <p className="text-red-500 text-base text-right">*Obligatorio</p>
@@ -58,8 +58,7 @@ const Form = () => {
                         <input
                             className="form-price border-emerald-500"
                             type="number" 
-                            name="price" 
-                            placeholder=""
+                            name="price"
                             // teto por defecto
                             defaultValue={0}
                             required
@@ -111,12 +110,13 @@ const Form = () => {
                             <option value="XXL">XXL</option>
                         </select>
                         <p className="text-red-500 text-base text-right">*Obligatorio</p>
+                        <div className="md:w-2/3 ">
+                        <button className="button" type="submit">Crear producto</button>
                     </div>
+                    </div>
+                    
                 </div>
 
-                <div className="md:w-2/3">
-                    <button className="button" type="submit">Crear producto</button>
-                </div>
             </form>
         </div>
     )

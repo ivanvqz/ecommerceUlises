@@ -1,29 +1,28 @@
 import useFetch from "../../hooks/Usefetch"
+import Loader from "../atoms/Loader"
+import ProductCard from "../molecules/ProductCard"
+
 
 const Products = () => {
 
     const {data, error, loading} = useFetch("public/products") // endopint
-    if( loading ) return <p className="text-center">Loading...</p>
-    if( error ) return <p className="text-center">Error en la petición</p>
+    if( loading ) return <Loader />
+    if( error ) return <p className="text-center">{error?.message}</p>
 
     return (
-        <>
-            <div>
-                <h1 className="title">Nuestros productos</h1>
-                { data.length === 0 ?
-                (<p className="text-center">No existen productos</p>) :
-                    data.map( product => (
-                        (
-                            <div key={product.id}>
-                                <h2 className="subtitle">{product.name}</h2>
-                                <p >{product.image}</p>
-                                <p className="paragraph">{product.description}</p>
-                            </div>
-                        )
+        <section className="py-16 max-w-256 m-auto">
+            <h1 className="text-3xl mb-6">Explora nuestros productos</h1>
+            <div className="grid grid-cols-4 gap-6">
+                {
+                    data.map((product) => (
+                        <ProductCard
+                            key={product.id}
+                            product={product}
+                        />
                     ))
                 }
             </div>
-        </>
+        </section>
     )
 }
 
