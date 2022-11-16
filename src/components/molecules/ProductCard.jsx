@@ -21,6 +21,7 @@ const ProductCard = ({product}) => {
                         {product_name}
                     </h3>
                 </Link>
+                <p>{description}</p>
             </div>
             <div className="flex justify-between items-center">
                 <span className="text-xl font-bold text-gray-900">

@@ -1,11 +1,11 @@
-import useFetch from "../../hooks/Usefetch"
+import useFetch from "../../hooks/useFetch"
 import Loader from "../atoms/Loader"
 import ProductCard from "../molecules/ProductCard"
 
 
 const Products = () => {
 
-    const {data, error, loading} = useFetch("public/products") // endopint
+    const {data, error, loading} = useFetch("public/products") // endpoint
     if( loading ) return <Loader />
     if( error ) return <p className="text-center">{error?.message}</p>
 
