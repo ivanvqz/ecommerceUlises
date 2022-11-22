@@ -11,7 +11,7 @@ const MainMenu = () => {
 
     return (
         <nav className="w-full">
-            <ul className="flex justify-end text-gray-100">
+            <ul className="flex justify-end text-gray-100 text-lg text-black">
                 <li className="flex items-center">
                     <Link className="menu-item" to="/">
                         Inicio

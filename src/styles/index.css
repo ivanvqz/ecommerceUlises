@@ -6,6 +6,15 @@
     background: linear-gradient(to right, #1460bc, #2498ce, #36a3dd, #4482c4);
 }
 
+@media (min-width: 320px) {
+    .cont{
+        width: 90%;
+    }
+    .media {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
 .menu-item {
     @apply py-5 px-4 hover:text-sky-100;    
 }

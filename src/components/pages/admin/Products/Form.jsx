@@ -7,12 +7,13 @@ const Form = () => {
         e.preventDefault()
         
         const data = {
-            product_name: e.target.productName.value,
+            product_name: e.target.product_name.value,
             price: Number(e.target.price.value),
             images: [e.target.image.value],
             description: e.target.description.value,
             features: {
-                talla: e.target.talla.value
+                // size (select)
+                size: e.target.size.value,
             }
             
         }
@@ -102,7 +103,7 @@ const Form = () => {
                             placeholder="Color" 
                             required
                         /> */}
-                        <select className="form-select" name="talla" required>
+                        <select className="form-select" name="size" required>
                             <option value="C">CH</option>
                             <option value="M">M</option>
                             <option value="L">L</option>

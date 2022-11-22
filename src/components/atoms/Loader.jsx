@@ -7,7 +7,7 @@ const Loader = () => {
             <Jelly 
                 size={80}
                 speed={0.9} 
-                color="black" 
+                color="blue" 
             />
         </div>
     )

@@ -5,28 +5,29 @@ const ProductCard = ({product}) => {
     const {images, product_name, price, id, description} = product
 
     return (
-        <article className="w-full max-w-sm bg-white rounded-lg shadow-lg p-5">
-            <div className="mb-5 rounded-lg overflow-hidden">
+        <article className="flex flex-col h-70 border border-black">
+            <div className="h-1/2 border border-emerald-500">
                 <Link to={`/productos/${id}`}>
                     <img
-                        className="align-middle h-40 w-full object-cover"
+                        className="bg-center h-full w-full cover"
                         src={images[0]}
                         alt={product_name}
                     />
                 </Link>
             </div>
-            <div className="mb-6">
+            <div className="h-1/2 p-2">
                 <Link to={`/productos/${id}`}>
-                    <h3 className="text-xl font-semibold tracking-tight text-gray-900 mb-2">
+                    <h3 className="text-center text-base font-semibold lowercase tracking-tight text-gray-900 mb-2">
                         {product_name}
                     </h3>
                 </Link>
-                <p>{description}</p>
-            </div>
-            <div className="flex justify-between items-center">
-                <span className="text-xl font-bold text-gray-900">
-                    {formatPrice(price)}
-                </span>
+                <p class="text-sm text-gray-800">{description}</p>
+                <div className="">
+                    <span className="">
+                        {formatPrice(price)}
+                    </span>
+                </div>
+                
             </div>
         </article>
     )
