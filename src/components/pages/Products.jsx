@@ -10,9 +10,9 @@ const Products = () => {
     if( error ) return <p className="text-center">{error?.message}</p>
 
     return (
-        <section className="py-16 container mx-auto cont">
+        <section className="py-16 mov mx-auto cont">
             <h1 className="text-2xl font-bold mb-6">Explora nuestros productos</h1>
-            <div className="grid md:grid-cols-4 gap-6 media">
+            <div className="grid grid-cols-2 gap-6 media">
                 {
                     data.map((product) => (
                         <ProductCard

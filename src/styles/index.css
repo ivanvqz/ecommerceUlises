@@ -5,56 +5,93 @@
 .bg-gradient {
     background: linear-gradient(to right, #1460bc, #2498ce, #36a3dd, #4482c4);
 }
+.bg-gradient-purple {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+}
+
+@layer components {
+    .btn {
+        @apply bg-gradient text-white font-bold p-2 rounded-lg cursor-pointer;
+    }
+    .btn-sc {
+        @apply bg-gradient-purple text-white font-bold p-2 rounded-lg;
+    }
+    .menu-item {
+        @apply py-5 px-4 hover:text-sky-100;    
+    }
+    
+    .title {
+        @apply text-3xl font-bold text-black text-center;
+    }
+    
+    .subtitle {
+        @apply text-2xl font-bold text-black text-center;
+    }
+    
+    .paragraph {
+        @apply text-base text-black;
+    }
+    
+    .form-label {
+        @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+    }
+    
+    .form-input {
+        @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-emerald-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white;
+    }
+    
+    .form-price {
+        @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-emerald-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+    }
+    
+    .title-dashboard {
+        @apply text-4xl font-sans font-bold text-black text-center uppercase my-3;
+    }
+    
+    .button {
+        @apply  my-2 shadow bg-purple-500 hover:bg-purple-400 focus:outline-none text-white font-bold py-2 px-4 rounded;
+    }
+    
+    .form-select{
+        @apply block appearance-none w-full bg-gray-200 border border-emerald-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-emerald-500;
+    }
+}
+
+
+.desktop{
+    @apply md:flex-col md:items-center md:justify-center;
+}
+
+.hideMenuNav {
+    display: none;
+}
+/* hide hideMenuNav at moment to click it */
+
+
+.showMenuNav {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: white;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.mov {
+    width: 95%;
+}
 
 @media (min-width: 320px) {
     .cont{
         width: 90%;
     }
-    .media {
+    /* .media {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-.menu-item {
-    @apply py-5 px-4 hover:text-sky-100;    
-}
-
-.title {
-    @apply text-3xl font-bold text-black text-center;
-}
-
-.subtitle {
-    @apply text-2xl font-bold text-black text-center;
-}
-
-.paragraph {
-    @apply text-base text-black;
-}
-
-.form-label {
-    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
-}
-
-.form-input {
-    @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-emerald-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white;
-}
-
-.form-price {
-    @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-emerald-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
-}
-
-.title-dashboard {
-    @apply text-4xl font-sans font-bold text-black text-center uppercase my-3;
-}
-
-.button {
-    @apply  my-2 shadow bg-purple-500 hover:bg-purple-400 focus:outline-none text-white font-bold py-2 px-4 rounded;
-}
-
-.form-select{
-    @apply block appearance-none w-full bg-gray-200 border border-emerald-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-emerald-500;
-}
-
-.desktop{
-    @apply md:flex-col md:items-center md:justify-center;
+    } */
 }

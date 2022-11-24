@@ -21,7 +21,7 @@ const ProductCard = ({product}) => {
                         {product_name}
                     </h3>
                 </Link>
-                <p class="text-sm text-gray-800">{description}</p>
+                <p className="text-sm text-gray-800">{description}</p>
                 <div className="">
                     <span className="">
                         {formatPrice(price)}
