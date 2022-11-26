@@ -15,9 +15,8 @@ const MainMenu = () => {
     return (
 
         <div className="mov mx-auto media">
-            <div className="border-b border-gray-400">
-                <div className="flex items-center justify-end py-8">
-                    
+            <div className="">
+                <div className="flex items-center justify-end">
                     <nav>
                         <section className="MOBILE-MENU flex lg:hidden">
                         <div
@@ -26,9 +25,9 @@ const MainMenu = () => {
                                 () => setIsNavOpen((prev) => !prev)
                             } // toggle isNavOpen state on click
                         >
-                            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-                                <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-                            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
+                            <span className="block h-0.5 w-8 animate-pulse bg-white"></span>
+                            <span className="block h-0.5 w-8 animate-pulse bg-white"></span>
+                            <span className="block h-0.5 w-8 animate-pulse bg-white"></span>
                         </div>
 
                         {/* toggle class based on isNavOpen state */}
@@ -49,41 +48,41 @@ const MainMenu = () => {
                                 <line x1="18" y1="6" x2="6" y2="18" />
                                 <line x1="6" y1="6" x2="18" y2="18" />
                             </svg>
-                        </div>
-                        <ul className="MENU-LINK-MOBILE-OPEN flex flex-col items-center justify-between min-h-[250px]">
-                        <li className="flex items-center">
-                        <Link className="menu-item" to="/">
-                            Inicio
-                        </Link>
-                        </li>
-                            <li className="flex items-center">
-                                <Link className="menu-item" to="/products">
-                                    Productos
+                            </div>
+                            <ul className="MENU-LINK-MOBILE-OPEN flex flex-col items-center justify-between min-h-[250px]">
+                                <li className="flex items-center">
+                                <Link className="menu-item" to="/">
+                                    Inicio
                                 </Link>
-                            </li>
+                                </li>
+                                <li className="flex items-center">
+                                    <Link className="menu-item" to="/products">
+                                        Productos
+                                    </Link>
+                                </li>
 
-                            {/* Validar si el usuario esta logeado */}
-                            
-                            {
-                                !Token() ?
-                                    (<li className="flex items-center">
-                                        <Link className="btn" to="/login">
-                                            Iniciar sesión
-                                        </Link>
-                                    </li>)
-                                : (
-                                    <li className="flex items-center">
-                                        <a onClick={handleSession} className="btn-sc cursor-pointer">
-                                            Cerrar sesión
-                                        </a>
-                                    </li>
-                                )
-                            }
+                                {/* Validar si el usuario esta logeado */}
+                                
+                                {
+                                    !Token() ?
+                                        (<li className="flex items-center">
+                                            <Link className="btn" to="/login">
+                                                Iniciar sesión
+                                            </Link>
+                                        </li>)
+                                    : (
+                                        <li className="flex items-center">
+                                            <a onClick={handleSession} className="btn-sc cursor-pointer">
+                                                Cerrar sesión
+                                            </a>
+                                        </li>
+                                    )
+                                }
                             </ul>
                         </div>
                         </section>
 
-                        <ul className="DESKTOP-MENU hidden space-x-8 lg:flex">
+                        <ul className="hidden space-x-8 lg:flex">
                             <li className="flex items-center">
                                 <Link className="menu-item" to="/">
                                     Inicio

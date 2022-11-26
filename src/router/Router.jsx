@@ -6,6 +6,7 @@ import Login from '../components/pages/Login.jsx';
 import App from '../components/templates/App';
 import Register from '../components/pages/Register';
 import Form from '../components/pages/admin/Products/Form';
+import Table from '../components/pages/admin/Products/Table';
 const Router = createBrowserRouter([
     //array de todas las rutas de la app
     {
@@ -35,7 +36,11 @@ const Router = createBrowserRouter([
     {
         path: '/admin/products/create',
         element: <Form />,
-    }
+    },
+    {
+        path: '/admin/products',
+        element: <Table />,
+    },
     
 ])
 

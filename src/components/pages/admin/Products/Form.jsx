@@ -25,14 +25,10 @@ const Form = () => {
                     Authorization: `Bearer ${Token()}` // bearer es un tipo de token
                 },
             })
-            .then(resp => {
-                console.log(resp);
-                alert("producto creado")
+            .then(() => {
+                nav("/admin/products")
             })
-            .catch( err => {
-                console.log(err);
-                alert("Error al crear producto")
-            })
+            .catch( err => {setError(err)})
     }
 
     return (
