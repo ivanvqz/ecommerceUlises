@@ -33,11 +33,11 @@
     }
     
     .form-label {
-        @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+        @apply block tracking-wide text-gray-700 text-sm font-bold mb-2;
     }
     
     .form-input {
-        @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-emerald-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white;
+        @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-emerald-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white;
     }
     
     .form-price {
@@ -45,7 +45,7 @@
     }
     
     .title-dashboard {
-        @apply text-4xl font-sans font-bold text-black text-center uppercase my-3;
+        @apply text-2xl font-sans font-bold text-black text-left capitalize my-3;
     }
     
     .button {
@@ -54,6 +54,21 @@
     
     .form-select{
         @apply block appearance-none w-full bg-gray-200 border border-emerald-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-emerald-500;
+    }
+    .aviso {
+        @apply text-red-500 text-xs italic text-right;
+    }
+
+    /*tablas*/
+    table {
+        @apply w-full text-sm shadow-md rounded my-6;
+    }
+    thead {
+        @apply uppercase bg-sky-700 text-white;
+    }
+
+    th, td {
+        @apply border-b border-gray-200 p-3;
     }
 }
 

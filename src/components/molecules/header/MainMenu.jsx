@@ -33,7 +33,7 @@ const MainMenu = () => {
                         {/* toggle class based on isNavOpen state */}
                         <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
                             <div
-                            className="CROSS-ICON absolute top-0 right-0 px-8 py-8"
+                            className="CROSS-ICON absolute top-0 right-0 px-8"
                             onClick={() => setIsNavOpen(false)} // change isNavOpen state to false to close the menu
                             >
                             <svg

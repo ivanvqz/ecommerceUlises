@@ -34,13 +34,14 @@ const Router = createBrowserRouter([
         element: <Register />,
     },
     {
-        path: '/admin/products/create',
-        element: <Form />,
-    },
-    {
         path: '/admin/products',
         element: <Table />,
     },
+    {
+        path: '/admin/products/create',
+        element: <Form />,
+    },
+    
     
 ])
 

@@ -5,10 +5,11 @@ const Logo = () => {
         // ajustar o tamanho da imagem
         <div className="logo w-full flex">
             <Link to="/">
-                <img
+                {/* <img
                     src="https://ed.team/images/logo/logo-monocolor.svg" 
                     alt="logo"
-                />
+                /> */}
+                <h3 className="text-2xl font-bold uppercase">Logo.</h3>
             </Link>
         </div>
     )
