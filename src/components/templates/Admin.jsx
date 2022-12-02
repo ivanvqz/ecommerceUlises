@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom'
-import MainMenu from '../molecules/header/MainMenu'
+import AdminMenu from '../molecules/header/AdminMenu'
 import MainHeader from '../organisms/MainHeader'
-const App = () => {
+const Admin = () => {
     return (
         <div>
-            <MainHeader>
-                <MainMenu/>
+            <MainHeader >
+                <AdminMenu />
             </MainHeader>
             {/* outlet es el componente que se encarga de renderizar el contenido de
              la ruta */}
@@ -16,4 +16,4 @@ const App = () => {
     )
 }
 
-export default App
+export default Admin

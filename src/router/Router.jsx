@@ -7,6 +7,8 @@ import App from '../components/templates/App';
 import Register from '../components/pages/Register';
 import Form from '../components/pages/admin/Products/Form';
 import Table from '../components/pages/admin/Products/Table';
+import Admin from '../components/templates/Admin';
+
 const Router = createBrowserRouter([
     //array de todas las rutas de la app
     {
@@ -34,13 +36,23 @@ const Router = createBrowserRouter([
         element: <Register />,
     },
     {
-        path: '/admin/products',
-        element: <Table />,
-    },
-    {
-        path: '/admin/products/create',
-        element: <Form />,
-    },
+        path: '/admin',
+        element: <Admin />,
+        children: [
+            {
+                path: '/admin/products',
+                element: <Table />,
+            },
+            {
+                path: '/admin/products/create',
+                element: <Form />,
+            },
+            {
+                path: '/admin/products/edit/:id',
+                element: <Form />,
+            },
+        ]
+    }
     
     
 ])

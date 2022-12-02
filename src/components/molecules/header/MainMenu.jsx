@@ -1,12 +1,14 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { UserContext } from "../../../context/UserContext"
 import { DeleteToken, Token } from '../../../helpers/auth'
 
 const MainMenu = () => {
     const [isNavOpen, setIsNavOpen] = useState(false)
-    const [closeNav, setCloseNav] = useState(false)
+    const { userData } = useContext(UserContext)
 
     const nav = useNavigate()
+
     const handleSession = () => {
         DeleteToken()
         nav("/") // Redirect to home
@@ -71,11 +73,20 @@ const MainMenu = () => {
                                             </Link>
                                         </li>)
                                     : (
-                                        <li className="flex items-center">
-                                            <a onClick={handleSession} className="btn-sc cursor-pointer">
-                                                Cerrar sesión
-                                            </a>
-                                        </li>
+                                        <>
+                                            {userData?.is_admin && (
+                                                <li className="flex items-center">
+                                                    <Link className="menu-item" to="/admin/products">
+                                                        Administrar productos
+                                                    </Link>
+                                                </li>
+                                            )}
+                                            <li className="flex items-center">
+                                                <a onClick={handleSession} className="btn-sc cursor-pointer">
+                                                    Cerrar sesión
+                                                </a>
+                                            </li>
+                                        </>
                                     )
                                 }
                             </ul>
@@ -104,11 +115,21 @@ const MainMenu = () => {
                                         </Link>
                                     </li>)
                                 : (
-                                    <li className="flex items-center">
-                                        <a onClick={handleSession} className="menu-item cursor-pointer">
-                                            Cerrar seción
-                                        </a>
-                                    </li>
+                                    <>
+                                    {userData?.is_admin && (
+                                        <li className="flex items-center">
+                                            <Link className="menu-item" to="/admin/products">
+                                                Administrar productos
+                                            </Link>
+                                        </li>
+                                    )}
+                                            
+                                            <li className="flex items-center">
+                                                <a onClick={handleSession} className="menu-item">
+                                                    Cerrar sesión
+                                                </a>
+                                            </li>
+                                        </>
                                 )
                             }
                         </ul>

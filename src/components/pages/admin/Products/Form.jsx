@@ -3,13 +3,15 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { API_URL } from "../../../../constants/env"
 import { Token } from "../../../../helpers/auth"
+import Loader from "../../../atoms/Loader"
 
 const Form = () => {
     const nav = useNavigate()
     const params = useParams()
-
+    console.log(params)
     
     const [product, setProduct] = useState()
+    const [error, setError] = useState()
     const [loading, setLoading] = useState(false)
     
     useEffect(() => {
@@ -20,19 +22,13 @@ const Form = () => {
             .then((data) => {
                 setProduct(data.data.data)
             })
+            .catch( error => setError(error) )
             .finally(() => {
                 setLoading(false)
             })
         }
     }, [])
 
-    useEffect(() => {
-        if (!product) return
-        setIsNew(product.features.stats.isNew)
-        setHasDelivery(product.features.stats.hasDelivery)
-    }, [product])
-
-    const [error, setError] = useState()
     const handleSubmit = (e) => {
         e.preventDefault()
         
@@ -51,7 +47,8 @@ const Form = () => {
         }
 
         // envío de la info
-        axios
+        if (!params.id) {
+            axios
             .post(`${API_URL}/admin/products`, body, {//  header 
                 headers: {
                     Authorization: `Bearer ${Token()}` // bearer es un tipo de token
@@ -61,11 +58,27 @@ const Form = () => {
                 nav("/admin/products")
             })
             .catch( err => {setError(err)})
+        } else {
+            axios
+            .put(`${API_URL}/admin/products/${params.id}`, body, {//  actualiza el producto
+                headers: {
+                    Authorization: `Bearer ${Token()}` // bearer es un tipo de token
+                },
+            })
+            .then(() => {
+                nav("/admin/products")
+            })
+            .catch( err => {setError(err)})
+        }
     }
+
+    if (loading) return <Loader />
 
     return (
         <div className="w-11/12	mx-auto">
-            <h2 className="title-dashboard">Crear producto</h2>
+            <h2 className="title-dashboard">
+                {`${params.id ? "Editar" : "Crear"}`} producto
+            </h2>
 
             <form onSubmit={handleSubmit} className="w-full max-w-l my-3">
                 <div className="grid md:grid-cols-2 gap-2 items-center">
@@ -77,6 +90,7 @@ const Form = () => {
                             className="form-input"
                             type="text" 
                             name="product_name"
+                            defaultValue={product && product.product_name}
                             required
                         />
                         <p className="aviso">*Obligatorio</p>
@@ -89,6 +103,7 @@ const Form = () => {
                             className="form-price border-emerald-500"
                             type="number" 
                             name="price"
+                            defaultValue={product && product.price}
                             required
                         />
                         <p className="aviso">*Obligatorio</p>
@@ -99,8 +114,9 @@ const Form = () => {
                         </label>
                         <input 
                             className="form-input"
-                            type="url" 
+                            type="text" 
                             name="image"
+                            defaultValue={product && product.images[0]}
                             required
                         />
                         <p className="aviso">*Obligatorio</p>
@@ -113,6 +129,7 @@ const Form = () => {
                             className="form-input"
                             type="tetx" 
                             name="color"
+                            defaultValue={product && product.features.details.color}
                             required
                         />
                         <p className="aviso">*Obligatorio</p>
@@ -132,9 +149,7 @@ const Form = () => {
                         <select 
                             className="form-select" 
                             name="size" 
-                            defaultValue={
-                                "Selecciona una talla"
-                            }
+                            defaultValue={product && product.features.details.size}
                             required
                         >
                             <option value="otros">-- Seleccione una talla --</option>
@@ -154,6 +169,7 @@ const Form = () => {
                             className="form-input"
                             name="description" 
                             rows={2}
+                            defaultValue={product && product.description}
                             required
                         />
                         <p className="aviso">*Obligatorio</p>
@@ -162,7 +178,7 @@ const Form = () => {
 
 
                     <div className="block">
-                        <button className="button" type="submit">Crear producto</button>
+                        <button className="button" type="submit">Guardar</button>
                         <p>{error && JSON.stringify(error)}</p>     
                     </div>
                     

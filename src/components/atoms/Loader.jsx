@@ -1,11 +1,11 @@
-import { Jelly } from "@uiball/loaders"
+import { DotSpinner } from "@uiball/loaders"
 
 
 const Loader = () => {
     return (
         <div className="grid h-screen place-items-center">
-            <Jelly 
-                size={80}
+            <DotSpinner 
+                size={40}
                 speed={0.9} 
                 color="blue" 
             />
