@@ -20,11 +20,35 @@ const Product = () => {
     } ,[])
 
     return (
-        <div>
-            <h2>Producto: {product?.product_name}</h2>
-            <p>{JSON.stringify(product)}</p>
-            <button className="btn">Agregar al carrito</button>
-            <button className="btn">Quitar el carrito</button>
+        <div className="details">
+            <h2 className="details__title">Producto: {product?.product_name}</h2>
+            {/* recorremos la informacion del producto */}
+            <div className="details__container">
+                <div className="details__images">
+                    {/* recorrer las imagenes */}
+                    {product?.images?.map( (image, index) => (
+                        <img
+                            className="rounded-lg"
+                            src={image} 
+                            alt={product?.product_name} 
+                            key={index}
+                        />
+                    ))}
+                    {/* <img src={product?.images[0]} alt={product?.product_name} /> */}
+                </div>
+                <div className="details__description">
+                    <h3 className="details__d">Descripción</h3>
+                    <p>{product?.description}</p>
+                    <p className="">
+                        <span className="details__span">Precio: </span>
+                        ${product?.price}
+                    </p>
+                </div>
+                <div className="details__btns">
+                    <button className="btn">Agregar al carrito</button>
+                    <button className="btn">Quitar el carrito</button>
+                </div>
+            </div>
         </div>
     )
 }

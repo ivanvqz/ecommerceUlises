@@ -59,6 +59,32 @@
         @apply text-red-500 text-xs italic text-right;
     }
 
+    /* *DETALLES DEL PRODUCTO*/
+    .details {
+        @apply pt-10 container mx-auto;
+    }
+    .details__title {
+        @apply text-3xl font-bold text-black text-left px-2;
+    }
+    .details__container {
+        @apply flex flex-col md:flex-row pt-3;
+    }
+    .details__images{
+        @apply w-full bg-cover bg-no-repeat rounded-lg;
+    }
+    .details__description {
+        @apply p-2;
+    }
+    .details__d{
+        @apply text-lg font-bold text-black text-left;
+    }
+    .details__span {
+        @apply text-lg font-bold text-black text-left;
+    }
+    .details__btns {
+        @apply w-96 mx-auto flex flex-row justify-center gap-4;
+    }
+
     /*tablas*/
     table {
         @apply w-full text-sm shadow-md rounded my-6;
