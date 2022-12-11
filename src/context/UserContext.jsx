@@ -1,31 +1,38 @@
-import axios from "axios";
-import { createContext, useEffect, useState }  from"react";
-import { API_URL } from "../constants/env";
-import { Token } from "../helpers/auth";
+import axios from "axios"
+import { createContext, useEffect, useState }  from "react"
+import { API_URL } from "../constants/env"
+import { token } from "../helpers/auth"
 
-export const UserContext = createContext()
+const UserContext = createContext()
 
-export const UserProvider = ({ children }) => {
+const UserProvider = ({ children  }) => {
     const [userData, setUserData] = useState()
+    const [error, setError] = useState()
 
     useEffect(() => {
-        if (Token) {
-            axios
-                .get(`${API_URL}/private/users`, {
-                    headers: {
-                        Authorization: `Bearer ${Token()}`,
-                    },
-                })
-                .then((resp) => {
-                    setUserData(resp.data.data)
-                })
-                
-        }
+        if (token && token()) {
+                // Realizamos la petición GET a la URL especificada
+                axios
+                    .get(`${API_URL}/private/users`, {
+                        headers: {
+                            Authorization: `Bearer ${token()}`,
+                        },
+                    })
+                    .then((resp) => {
+                            // En caso contrario, obtenemos los datos del usuario
+                            setUserData(resp.data.data)
+                    })
+                    .catch( (error) => {
+                        setError(error)
+                    })
+                    }
+
     }, [])
 
     return (
         <UserContext.Provider value={{ userData, setUserData }}>
-            {children}
+            { children }
         </UserContext.Provider>
     )
 }
+export { UserContext, UserProvider }

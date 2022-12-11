@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { API_URL } from "../../../../constants/env"
-import { Token } from "../../../../helpers/auth"
+import { token } from "../../../../helpers/auth"
 import Loader from "../../../atoms/Loader"
 
 const Form = () => {
@@ -51,7 +51,7 @@ const Form = () => {
             axios
             .post(`${API_URL}/admin/products`, body, {//  header 
                 headers: {
-                    Authorization: `Bearer ${Token()}` // bearer es un tipo de token
+                    Authorization: `Bearer ${token()}` // bearer es un tipo de token
                 },
             })
             .then(() => {
@@ -62,7 +62,7 @@ const Form = () => {
             axios
             .put(`${API_URL}/admin/products/${params.id}`, body, {//  actualiza el producto
                 headers: {
-                    Authorization: `Bearer ${Token()}` // bearer es un tipo de token
+                    Authorization: `Bearer ${token()}` // bearer es un tipo de token
                 },
             })
             .then(() => {

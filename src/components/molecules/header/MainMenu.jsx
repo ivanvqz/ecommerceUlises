@@ -1,17 +1,17 @@
 import { useState, useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { UserContext } from "../../../context/UserContext"
-import { DeleteToken, Token } from '../../../helpers/auth'
+import { UserContext } from "../../../context/UserContext"  
+import { deleteToken, token } from '../../../helpers/auth'
 
 const MainMenu = () => {
-    const [isNavOpen, setIsNavOpen] = useState(false)
-    const { userData } = useContext(UserContext)
-
     const nav = useNavigate()
+    const [isNavOpen, setIsNavOpen] = useState(false)
+    const { userData, setUserData } = useContext(UserContext)
 
     const handleSession = () => {
-        DeleteToken()
+        deleteToken()
         nav("/") // Redirect to home
+        setUserData() // para eliminar los datos
     }
 
     return (
@@ -66,7 +66,7 @@ const MainMenu = () => {
                                 {/* Validar si el usuario esta logeado */}
                                 
                                 {
-                                    !Token() ?
+                                    !token() ?
                                         (<li className="flex items-center">
                                             <Link className="btn" to="/login">
                                                 Iniciar sesión
@@ -108,7 +108,7 @@ const MainMenu = () => {
                             {/* Validar si el usuario esta logeado */}
                             
                             {
-                                !Token() ?
+                                !token() ?
                                     (<li className="flex items-center">
                                         <Link className="menu-item" to="/login">
                                             Iniciar sesión
@@ -116,25 +116,24 @@ const MainMenu = () => {
                                     </li>)
                                 : (
                                     <>
-                                    {userData?.is_admin && (
-                                        <li className="flex items-center">
-                                            <Link className="menu-item" to="/admin/products">
-                                                Administrar productos
-                                            </Link>
-                                        </li>
-                                    )}
-                                            
+                                        {userData?.is_admin && (
                                             <li className="flex items-center">
-                                                <a onClick={handleSession} className="menu-item">
-                                                    Cerrar sesión
-                                                </a>
+                                                <Link className="menu-item" to="/admin/products">
+                                                    Administrar productos
+                                                </Link>
                                             </li>
-                                        </>
+                                        )}
+                                            
+                                        <li className="flex items-center">
+                                            <a onClick={handleSession} className="menu-item">
+                                                Cerrar sesión
+                                            </a>
+                                        </li>
+                                    </>
                                 )
                             }
                         </ul>
                     </nav>
-                    
                 </div>
             </div>  
         </div>

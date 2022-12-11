@@ -1,7 +1,7 @@
 import axios from "axios"
 import { Link } from "react-router-dom"
 import { API_URL } from "../../../../constants/env"
-import { Token } from "../../../../helpers/auth"
+import { token } from "../../../../helpers/auth"
 import useFetch from "../../../../hooks/useFetch"
 import Loader from "../../../atoms/Loader"
 
@@ -18,7 +18,7 @@ const Table = () => {
             // delete
             axios.delete(`${API_URL}/admin/products/${product.id}`, {
                 headers: {
-                    Authorization: `Bearer ${Token()}`,
+                    Authorization: `Bearer ${token()}`,
                 }
             })
             .then( () => {
