@@ -85,6 +85,17 @@
         @apply w-96 mx-auto flex flex-row justify-center gap-4;
     }
 
+    /* CARRITO*/
+    .product-card {
+        @apply 
+        w-5/6 mx-auto text-center
+        border border-gray-200 rounded-lg shadow-md 
+        p-2 flex flex-col justify-between product__center
+        ;
+    }
+    .product__center {
+        @apply w-full flex flex-col justify-center items-center;
+    }
     /*tablas*/
     table {
         @apply w-full text-sm shadow-md rounded my-6;

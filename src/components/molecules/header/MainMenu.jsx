@@ -113,7 +113,7 @@ const MainMenu = () => {
                             </li>
                             <li className="flex items-center">
                                     <Link className="menu-item" to="/carrito">
-                                        carrito
+                                        Carrito ({ state.cart.length })
                                     </Link>
                             </li>
 

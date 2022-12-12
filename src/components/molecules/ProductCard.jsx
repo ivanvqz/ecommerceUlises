@@ -1,8 +1,27 @@
+import { useContext } from "react"
 import { Link } from "react-router-dom"
+import CartContext from "../../context/CartContext"
 import { formatPrice } from "../../helpers/number"
 
 const ProductCard = ({product}) => {
     const {images, product_name, price, id, description} = product
+    const { state, dispatch } = useContext(CartContext)
+
+    const addToCart = () => {
+        // llamamos a la función de modificación del contexto
+        dispatch({
+            type: "ADD_TO_CART",
+            payload: product,
+        })
+    }
+
+    const removeFromCart = () => {
+        // llamamos a la función de modificación del contexto
+        dispatch({
+            type: "REMOVE_FROM_CART",
+            payload: product,
+        })
+    }
 
     return (
         <article className="flex flex-col h-70 border border-black">
@@ -26,6 +45,14 @@ const ProductCard = ({product}) => {
                     <span className="">
                         {formatPrice(price)}
                     </span>
+                </div>
+
+                <div>
+                    {
+                        (!state.cart.find( (c) => c.id === product.id))
+                        ? <button className="btn" onClick={addToCart}>Agregar al carrito</button>
+                        : <button className="btn" onClick={removeFromCart}>Quitar el carrito</button>
+                    }
                 </div>
                 
             </div>

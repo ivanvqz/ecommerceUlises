@@ -66,12 +66,7 @@ const Product = () => {
                     {
                         (!state.cart.find( (c) => c.id === product.id))
                         ? <button className="btn" onClick={addToCart}>Agregar al carrito</button>
-                        : null
-                    }
-                    {
-                        (state.cart.find( (c) => c.id === product.id))
-                        ? <button className="btn" onClick={removeFromCart}>Quitar el carrito</button>
-                        : null
+                        : <button className="btn" onClick={removeFromCart}>Quitar el carrito</button>
                     }
                 </div>
             </div>

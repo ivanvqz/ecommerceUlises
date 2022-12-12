@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import CartContext from "../../context/CartContext"
+import   CartContext  from "../../context/CartContext"
 import { formatPrice } from "../../helpers/number"
 
 
@@ -14,8 +14,8 @@ const SummaryItem = ({ product }) => {
     //     })
     // }
     return (
-        <div class="flex items-center justify-between py-8 items-top border-b border-gray-300/60">
-            <div className="flex">
+        <div className="py-8 items-top border-b border-gray-300/60">
+            <div className="flex justify-between items-center w-full">
                 <div className="rounded overflow-hidden mr-4">
                     <img
                         className="w-20 h-16 align-middle object-cover"
@@ -33,12 +33,12 @@ const SummaryItem = ({ product }) => {
                 </div>
                 <div>
                     <button
-                        onClick={() => {
+                        onClick={ () => {
                             dispatch({
                                 type: "REMOVE_FROM_CART",
                                 payload: product,
                             })
-                        }}
+                        } }
                         className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md"
                     >
                         <span>Eliminar</span>
