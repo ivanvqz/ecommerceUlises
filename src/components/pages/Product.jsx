@@ -1,12 +1,14 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { API_URL } from "../../constants/env"
+import CartContext from "../../context/CartContext"
+
 
 const Product = () => {
     // devuelve un objeto con los parametros de la url
     const params = useParams()
-
+    const {state, dispatch}  = useContext(CartContext) // obtenemos el estado y la función de modificación del contexto
     // declaramos el estado del producto
     const [ product, setProduct] = useState({})
 
@@ -18,6 +20,22 @@ const Product = () => {
                 setProduct(resp.data.data) // actualizamos el estado
             })
     } ,[])
+
+    const addToCart = () => {
+        // llamamos a la función de modificación del contexto
+        dispatch({
+            type: "ADD_TO_CART",
+            payload: product,
+        })
+    }
+
+    const removeFromCart = () => {
+        // llamamos a la función de modificación del contexto
+        dispatch({
+            type: "REMOVE_FROM_CART",
+            payload: product,
+        })
+    }
 
     return (
         <div className="details">
@@ -45,8 +63,16 @@ const Product = () => {
                     </p>
                 </div>
                 <div className="details__btns">
-                    <button className="btn">Agregar al carrito</button>
-                    <button className="btn">Quitar el carrito</button>
+                    {
+                        (!state.cart.find( (c) => c.id === product.id))
+                        ? <button className="btn" onClick={addToCart}>Agregar al carrito</button>
+                        : null
+                    }
+                    {
+                        (state.cart.find( (c) => c.id === product.id))
+                        ? <button className="btn" onClick={removeFromCart}>Quitar el carrito</button>
+                        : null
+                    }
                 </div>
             </div>
         </div>
