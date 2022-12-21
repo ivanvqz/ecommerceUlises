@@ -8,10 +8,9 @@ import Loader from "../../../atoms/Loader"
 const Form = () => {
     const nav = useNavigate()
     const params = useParams()
-    console.log(params)
-    
+
+    const [hasDelivery, setHasDelivery] = useState(false)
     const [product, setProduct] = useState()
-    const [error, setError] = useState()
     const [loading, setLoading] = useState(false)
     
     useEffect(() => {
@@ -28,8 +27,14 @@ const Form = () => {
             })
         }
     }, [])
+    
+    useEffect(() => {
+        if (!product) return
+        setHasDelivery(product.features.stats.hasDelivery)
+    }, [product])
 
-    const handleSubmit = (e) => {
+    const [error, setError] = useState()
+    const handleSubmit = (e) => {   
         e.preventDefault()
         
         const body = {
@@ -41,6 +46,13 @@ const Form = () => {
                 details: {
                     size: e.target.size.value,
                     color: e.target.color.value,
+                    model: e.target.model.value,
+                    // category: e.target.category.value,
+                },
+                stats: {
+                    rating: Number(e.target.rating.value),
+                    sold: Number(e.target.sold.value),
+                    hasDelivery,
                 }
             }
             
@@ -108,6 +120,18 @@ const Form = () => {
                         />
                         <p className="aviso">*Obligatorio</p>
                     </div>
+                    <div>
+                        <label htmlFor="sold" className="form-label">
+                            Vendidos
+                        </label>
+                        <input
+                            className="form-input"
+                            type="number"
+                            name="sold"
+                            step="1"
+                            defaultValue={product && product.features.stats.sold}
+                        />
+                    </div>
                     <div className="">
                         <label htmlFor="image" className="form-label">
                             URL de la imagen
@@ -120,6 +144,20 @@ const Form = () => {
                             required
                         />
                         <p className="aviso">*Obligatorio</p>
+                    </div>
+                    <div>
+                        <label htmlFor="color" className="form-label">Modelo</label>
+                        <input
+                            className="form-input"
+                            type="text"
+                            name="model"
+                            required
+                            defaultValue={
+                                product
+                                ? product.features.details.model
+                                : ""
+                            }
+                        />
                     </div>
                     <div className="">
                         <label htmlFor="color" className="form-label">
@@ -134,9 +172,26 @@ const Form = () => {
                         />
                         <p className="aviso">*Obligatorio</p>
                     </div>
-                    
+
+                    <div className="">
+                        <label htmlFor="delivery" className="form-label">
+                            Rating
+                        </label>
+                        <input 
+                            className="form-input"
+                            type="number" 
+                            name="rating"
+                            defaultValue={product && product.features.stats.rating}
+                            min="1"
+                            max="5"
+                            step="1"
+                            required
+                        />
+                        <p className="aviso">*Obligatorio</p>
+                    </div>
+
                     <div className="size">
-                        <label htmlFor="" className="form-label">
+                        <label htmlFor="size" className="form-label">
                             Talla
                         </label>
                         {/* <input 
@@ -149,10 +204,14 @@ const Form = () => {
                         <select 
                             className="form-select" 
                             name="size" 
-                            defaultValue={product && product.features.details.size}
+                            defaultValue={
+                                product ? product.features.details.size : ""
+                            }
                             required
                         >
-                            <option value="otros">-- Seleccione una talla --</option>
+                            <option value="" className="text-center">
+                                -- Seleccione una talla --
+                            </option>
                             <option value="C">CH</option>
                             <option value="M">M</option>
                             <option value="L">L</option>
@@ -173,6 +232,38 @@ const Form = () => {
                             required
                         />
                         <p className="aviso">*Obligatorio</p>
+                    </div>
+
+                    <div className="flex gap-10">
+                        <div>
+
+                        <p className="mb-2">Envio a domicilio</p>
+                        <div className="flex gap-2">
+                            <label className="flex items-center gap-1">
+                                <span>Si</span>
+                                <input
+                                    type="radio"
+                                    name="delivery"
+                                    className="mt-1"
+                                    onChange={() => setHasDelivery(true)}
+                                    checked={hasDelivery}
+                                />
+                            </label>
+                                <label className="flex items-center gap-1">
+                                    <span>No</span>
+                                    <input
+                                        type="radio"
+                                        name="no-delivery"
+                                        className="mt-1"
+                                        onChange={() => setHasDelivery(false)}
+                                        checked={!hasDelivery}
+                                    />
+                                </label>
+                        </div>
+
+
+
+                        </div>
                     </div>
 
 
