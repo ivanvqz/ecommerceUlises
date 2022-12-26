@@ -1,13 +1,42 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
 import CartContext from "../../context/CartContext"
 import SummaryItem from "../atoms/SummaryItem"
+import axios from "axios"
+import { API_URL } from "../../constants/env"
+import { token } from "../../helpers/auth"
 
 const Cart = () => {
   const { state } = useContext(CartContext)
+  const [ order, setOrder ] = useState()
   
   let value = 0
   state.cart.forEach((c) => (value += c.price))
+
+  const handleOrder = () => {
+    const products = state.cart.map((p) => {
+      return {
+        product_id: p.id,
+        amount: 1, // p.amount, mejorar
+        unit_price: p.price 
+      }
+    })
+
+    const data = {
+      products: products,
+    }
+    axios.post(`${API_URL}/private/purchase-orders`, data, {
+      headers: {
+        Authorization: `Bearer ${token()}`
+      }
+    })
+    .then( (resp) => {
+      setOrder(resp.data.data)// guardar la orden
+    })
+    .catch( (err) => {
+      alert("Error al generar la orden :(")
+    })
+  }
   
   return (
     <div className="pt-9">
@@ -26,6 +55,21 @@ const Cart = () => {
                         ))
                       }
                   </div>
+
+                  {
+                    !order
+                    ? (
+                      <button
+                        className="btn btn-primary mt-4"
+                        onClick={handleOrder}
+                      >
+                        Crear orden de pago
+                      </button>
+                    )
+                    : (
+                      <p>ID de orden de compra: {order.id}</p>
+                    )
+                  }
                 </div>
               )
               : (
