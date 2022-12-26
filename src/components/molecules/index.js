@@ -1,0 +1,5 @@
+export * from './PriceDetails'
+export * from './ProductDetails'
+export * from './ProductInformation'
+export * from './ShareProduct'
+export * from './RelatedProducts'

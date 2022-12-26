@@ -1,75 +1,96 @@
-import axios from "axios"
-import { useContext, useEffect, useState } from "react"
+import useFetch from "../../hooks/useFetch"
+import Loader from "../atoms/Loader"
+import { useContext} from "react"
 import { useParams } from "react-router-dom"
-import { API_URL } from "../../constants/env"
 import CartContext from "../../context/CartContext"
-
+import { Badge, BuyButton, ProductRating } from "../atoms"
+import { ProductDetails, PriceDetails, ProductInformation, RelatedProducts, ShareProduct } from "../molecules"
 
 const Product = () => {
     // devuelve un objeto con los parametros de la url
-    const params = useParams()
     const {state, dispatch}  = useContext(CartContext) // obtenemos el estado y la función de modificación del contexto
-    // declaramos el estado del producto
-    const [ product, setProduct] = useState({})
+    const params = useParams()
+    const { data, loading, error } = useFetch(`public/products/${params.id}`)
 
-    // useeffect para obtener el producto
-    useEffect( () => {
-        axios
-            .get(`${API_URL}/public/products/${params.id}`)
-            .then( (resp) => {
-                setProduct(resp.data.data) // actualizamos el estado
-            })
-    } ,[])
+    if (loading) return <Loader />
+    if (error) return <div>{error?.message}</div>
 
-    const addToCart = () => {
-        // llamamos a la función de modificación del contexto
-        dispatch({
-            type: "ADD_TO_CART",
-            payload: product,
-        })
-    }
+    const { rating, sold, hasDelivery } = data.features.stats
 
-    const removeFromCart = () => {
-        // llamamos a la función de modificación del contexto
-        dispatch({
-            type: "REMOVE_FROM_CART",
-            payload: product,
-        })
-    }
+    // const addToCart = () => {
+    //     // llamamos a la función de modificación del contexto
+    //     dispatch({
+    //         type: "ADD_TO_CART",
+    //         payload: product,
+    //     })
+    // }
+
+    // const removeFromCart = () => {
+    //     // llamamos a la función de modificación del contexto
+    //     dispatch({
+    //         type: "REMOVE_FROM_CART",
+    //         payload: product,
+    //     })
+    // }
 
     return (
-        <div className="details">
-            <h2 className="details__title">Producto: {product?.product_name}</h2>
-            {/* recorremos la informacion del producto */}
-            <div className="details__container">
-                <div className="details__images">
-                    {/* recorrer las imagenes */}
-                    {product?.images?.map( (image, index) => (
+        <div className="container mx-auto">
+            <section className="py-10">
+                <div className="grid grid-cols-2 gap-6">
+                    <div>
+                        <div className="rounded-lg overflow-hidden mb-5">
                         <img
-                            className="rounded-lg"
-                            src={image} 
-                            alt={product?.product_name} 
-                            key={index}
+                            className="align-middle"
+                            src={data.images[0]}
+                            alt={data.product_name}
                         />
-                    ))}
-                    {/* <img src={product?.images[0]} alt={product?.product_name} /> */}
+                        </div>
+                        <ProductDetails details={data.features.details} />
+                    </div>
+                    
+
+                    <div>
+                        <span className="block text-gray-500 text-sm mb-2">
+                            {sold} vendidos
+                        </span>
+                        <h1 className="text-xl lg:text-2xl font-semibold leading-7 lg:leading-6 text-gray-800 mb-4">
+                            {data.product_name}
+                        </h1>
+                        <div className="flex items-center gap-2 mb-4">
+                            <ProductRating rating={rating} />
+                            {sold > 300 && <Badge text="Lo mas vendido" />}
+                        </div>
+                        <PriceDetails price={data.price} />
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                        <BuyButton text="Comprar ahora" />
+                        {!state.cart.find((p) => p.id === data.id) ? (
+                            <BuyButton
+                            text="Agregar al carrito"
+                            onClick={() => {
+                                dispatch({ type: "ADD_TO_CART", payload: data })
+                            }}
+                            isGhost
+                            />
+                        ) : (
+                            <BuyButton
+                            text="Quitar del carrito"
+                            onClick={() => {
+                                dispatch({ type: "REMOVE_FROM_CART", payload: data })
+                            }}
+                            isGhost
+                            />
+                        )}
+                        </div>
+                        <ProductInformation
+                            description={data.description}
+                            deliveryAvariable={hasDelivery}
+                        />
+                        <ShareProduct id={data.id} />
+                    </div>
+
                 </div>
-                <div className="details__description">
-                    <h3 className="details__d">Descripción</h3>
-                    <p>{product?.description}</p>
-                    <p className="">
-                        <span className="details__span">Precio: </span>
-                        ${product?.price}
-                    </p>
-                </div>
-                <div className="details__btns">
-                    {
-                        (!state.cart.find( (c) => c.id === product.id))
-                        ? <button className="btn" onClick={addToCart}>Agregar al carrito</button>
-                        : <button className="btn" onClick={removeFromCart}>Quitar el carrito</button>
-                    }
-                </div>
-            </div>
+            </section>
+            <RelatedProducts />
         </div>
     )
 }
