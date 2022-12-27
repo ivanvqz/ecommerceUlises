@@ -37,7 +37,7 @@ export const PayPalPayment = ({ value, order }) => {
                     return actions.order.capture().then((resp) => {
                         if ( resp.status === "COMPLETED" ) {
                             nav("/checkout-success")
-                            // clearCart()
+                            clearCart()
                         } else {
                             alert("El pago no se pudo procesar")
                         }
