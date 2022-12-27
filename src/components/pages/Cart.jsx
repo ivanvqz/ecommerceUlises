@@ -5,13 +5,14 @@ import SummaryItem from "../atoms/SummaryItem"
 import axios from "axios"
 import { API_URL } from "../../constants/env"
 import { token } from "../../helpers/auth"
+import { PayPalPayment } from "../organisms/PayPalPayment"
 
 const Cart = () => {
   const { state } = useContext(CartContext)
   const [ order, setOrder ] = useState()
   
   let value = 0
-  state.cart.forEach((c) => (value += c.price))
+  state.cart.forEach((c) => (value += c.price)) // suma de los preios de los productos
 
   const handleOrder = () => {
     const products = state.cart.map((p) => {
@@ -67,7 +68,13 @@ const Cart = () => {
                       </button>
                     )
                     : (
-                      <p>ID de orden de compra: {order.id}</p>
+                      <>
+                        <p>ID de orden de compra: {order.id}</p>
+                        <PayPalPayment
+                          value={value}
+                          order={order}
+                        />
+                      </>
                     )
                   }
                 </div>

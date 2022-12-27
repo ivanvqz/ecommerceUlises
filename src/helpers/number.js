@@ -1,8 +1,15 @@
-export const formatPrice = (amount, currency = 'MXN') => {
-    return new Intl.NumberFormat("es-MX", {
+// export const formatPrice = (amount, currency = 'MXN') => {
+//     return new Intl.NumberFormat("es-MX", {
+//         style: "currency",
+//         currency: currency,
+//         currencyDisplay: "symbol",
+//         }).format(amount)
+// }
+export const formatPrice = (amount) => {
+    return new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: currency,
-        currencyDisplay: "symbol",
+        currency: "USD",
+        currencyDisplay: "narrowSymbol",
         }).format(amount)
 }
 
