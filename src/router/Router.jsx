@@ -11,6 +11,7 @@ import Table from '../components/pages/admin/Products/Table';
 import Product from '../components/pages/Product';
 import Cart from '../components/pages/Cart';
 import { CheckoutSucces } from '../components/pages/CheckoutSucces';
+import { Profile } from '../components/pages/Profile';
 
 
 const Router = createBrowserRouter([
@@ -40,6 +41,10 @@ const Router = createBrowserRouter([
             {
                 path: '/checkout-success', //ruta del carrito
                 element: <CheckoutSucces />,
+            },
+            {
+                path: '/user', //ruta del carrito
+                element: <Profile />,
             }
         ]
     },
