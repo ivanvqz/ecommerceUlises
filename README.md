@@ -1,4 +1,8 @@
 # Ecommerce
+Instalar todas las dependencias:
+```
+    yarn
+```
 Instalar eslint con yarn
 ```
 yarn add --D eslint-config-react-app eslint
